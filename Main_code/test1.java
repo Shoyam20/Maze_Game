@@ -1,4 +1,9 @@
 package Main_code;     // using these libraries to take the input directly from the terminal no need press enter
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
@@ -6,7 +11,10 @@ import org.jline.terminal.TerminalBuilder;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class test1 {
+
+    static ArrayList<Integer>[] graph;
 
     static void printing(String [][]maze , int row,int col)
     {
@@ -17,6 +25,35 @@ public class test1 {
                 System.out.print(maze[i][j]);
             }
             System.out.println();
+        }
+    }
+    static void BFS(String[][] maze, int row, int col) {
+
+        int start = 1 * col + 1;
+        int end = (row - 2) * col + (col - 2);
+
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] visited = new boolean[row * col];
+        int[] parent = new int[row * col];
+
+        Arrays.fill(parent, -1);
+
+        q.add(start);
+        visited[start] = true;
+
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+
+            if (curr == end)
+                break;
+
+            for (int nei : graph[curr]) {
+                if (!visited[nei]) {
+                    visited[nei] = true;
+                    parent[nei] = curr;
+                    q.add(nei);
+                }
+            }
         }
     }
     static void Multi_path(String [][]maze,int row,int col , Double prob)
@@ -74,6 +111,45 @@ public class test1 {
         }
     }
 
+    static void tograph(String [][]maze,int row,int col)
+    {
+        int totalnodes=row*col;
+
+        graph=new ArrayList[totalnodes];
+
+        for(int i =0;i<totalnodes;i++)
+        {
+            graph[i]=new ArrayList<>();
+        }
+
+        for(int i =0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                if(!maze[i][j].equals(" X "))
+                {
+                    int curr=i*col+j;
+
+                    if(i>0 && !maze[i-1][j].equals(" X "))
+                    {
+                        graph[curr].add((i-1)*col+j);
+                    }
+                    if(i<row-1 && !maze[i+1][j].equals(" X "))
+                    {
+                        graph[curr].add((i+1)*col+j);
+                    }
+                    if(j>0 && !maze[i][j-1].equals(" X "))
+                    {
+                        graph[curr].add(i*col+(j-1));
+                    }
+                    if(j<col-1 && !maze[i][j+1].equals(" X "))
+                    {
+                        graph[curr].add(i*col+(j+1));
+                    }
+                }
+            }
+        }
+    }
     public static void main(String[] args)throws Exception {
 
         Terminal terminal = TerminalBuilder.builder().system(true).build();   // using for direct input from terminal 
@@ -101,7 +177,7 @@ public class test1 {
         
         DFS(maze, 1, 1, row, col);
 
-        maze[1][1]=" S ";
+        maze[1][1]=" S ";   
         maze[row-2][col-2]=" E ";
         maze[row-2][col-1]="-->";
 
@@ -192,6 +268,10 @@ public class test1 {
             if (a == row - 2 && b == col - 2)
             {
                 System.out.println("Exiting.......");
+
+                System.out.println("\nShortest Path :");
+                printing(maze, row, col);
+
                 found = true;
             }
 
