@@ -210,7 +210,7 @@ public class test1 {
                     if (maze[a - 1][b].equals(" X ")) {
                         System.out.println("Hit wall.");
                     } else {
-                        maze[a][b] = " . ";
+                        maze[a][b] = " # ";
                         a -= 1;
                         maze[a][b] = " P ";
                     }
@@ -223,7 +223,7 @@ public class test1 {
                     if (maze[a + 1][b].equals(" X ")) {
                         System.out.println("Hit wall.");
                     } else {
-                        maze[a][b] = " . ";
+                        maze[a][b] = " # ";
                         a += 1;
                         maze[a][b] = " P ";
                     }
@@ -236,7 +236,7 @@ public class test1 {
                     if (maze[a][b - 1].equals(" X ")) {
                         System.out.println("Hit wall.");
                     } else {
-                        maze[a][b] = " . ";
+                        maze[a][b] = " # ";
                         b -= 1;
                         maze[a][b] = " P ";
                     }
@@ -249,7 +249,7 @@ public class test1 {
                     if (maze[a][b + 1].equals(" X ")) {
                         System.out.println("Hit wall.");
                     } else {
-                        maze[a][b] = " . ";
+                        maze[a][b] = " # ";
                         b += 1;
                         maze[a][b] = " P ";
                     }
