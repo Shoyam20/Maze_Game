@@ -27,6 +27,7 @@ public class test1 {
             System.out.println();
         }
     }
+    // Add path representation and correct the error (Vanshika)
     static void BFS(String[][] maze, int row, int col) {
 
         int start = 1 * col + 1;
