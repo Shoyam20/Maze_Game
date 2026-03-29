@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class test2 {
+public class test1 {
 
     static ArrayList<Integer>[] graph;
 
