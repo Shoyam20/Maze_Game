@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class test1 {
+public class test2 {
 
     static ArrayList<Integer>[] graph;
 
@@ -28,35 +28,53 @@ public class test1 {
         }
     }
     // Add path representation and correct the error (Vanshika)
-    static void BFS(String[][] maze, int row, int col) {
+    static void BFS(String[][] maze, int row, int col)
+{
+    int start = 1 * col + 1;
+    int end = (row - 2) * col + (col - 2);
 
-        int start = 1 * col + 1;
-        int end = (row - 2) * col + (col - 2);
+    Queue<Integer> q = new LinkedList<>();
+    boolean visited[] = new boolean[row * col];
+    int parent[] = new int[row * col];
 
-        Queue<Integer> q = new LinkedList<>();
-        boolean[] visited = new boolean[row * col];
-        int[] parent = new int[row * col];
+    Arrays.fill(parent,-1);
 
-        Arrays.fill(parent, -1);
+    q.add(start);
+    visited[start] = true;
 
-        q.add(start);
-        visited[start] = true;
+    while(!q.isEmpty())
+    {
+        int curr = q.poll();
 
-        while (!q.isEmpty()) {
-            int curr = q.poll();
+        if(curr == end)
+            break;
 
-            if (curr == end)
-                break;
-
-            for (int nei : graph[curr]) {
-                if (!visited[nei]) {
-                    visited[nei] = true;
-                    parent[nei] = curr;
-                    q.add(nei);
-                }
+        for(int nei : graph[curr])
+        {
+            if(!visited[nei])
+            {
+                visited[nei] = true;
+                parent[nei] = curr;
+                q.add(nei);
             }
         }
     }
+
+    // Reconstruct shortest path
+    int curr = end;
+
+    while(curr != -1)
+    {
+        int r = curr / col;
+        int c = curr % col;
+
+      if(maze[r][c].equals(" . "))
+    {
+    maze[r][c] = " * ";
+    }
+        curr = parent[curr];
+    }
+}
     static void Multi_path(String [][]maze,int row,int col , Double prob)
     {
         Random rand = new Random();
@@ -268,14 +286,17 @@ public class test1 {
                 }
                 System.out.println();
             }
-            if (a == row - 2 && b == col - 2)
+          if (a == row - 2 && b == col - 2)
             {
-                System.out.println("Exiting.......");
+            System.out.println("Exiting.......");
 
-                System.out.println("\nShortest Path :");
-                printing(maze, row, col);
+            tograph(maze,row,col);   // convert maze to graph
+            BFS(maze,row,col);       // run BFS
 
-                found = true;
+            System.out.println("\nShortest Path :");
+            printing(maze, row, col);
+
+            found = true;
             }
 
         }
