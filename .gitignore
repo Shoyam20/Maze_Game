@@ -1,0 +1,13 @@
+# Java
+*.class
+*.bak
+
+# Node
+node_modules/
+dist/
+.env
+
+# Misc
+.DS_Store
+*.log
+leaderboard.txt
