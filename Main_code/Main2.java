@@ -1,14 +1,10 @@
 
 import java.util.Random;
 import java.util.Scanner;
-// import org.jline.terminal.Terminal;
-// import org.jline.terminal.TerminalBuilder;
-
 
 public class Main2 {
     public void func() throws Exception
     {
-        // Terminal terminal =TerminaBuilder.builder().system(true).build();
 
         Scanner sc = new Scanner(System.in);
         DFS dfs =new DFS();
@@ -122,9 +118,6 @@ public class Main2 {
         System.out.println(" Player Steps :"+player_moves);
         System.out.println(" BFS Steps :"+bfs_count);
         System.out.println(" Dijkstra Steps :"+dijkstra_count);
-
-        // double ratio =(double)bfs_count/player_moves;
-
 
         
         System.out.println("Successfully complete all levels.");
